@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plants list{% endblock %}
+
+{% block body %}
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <div class="relative">
+                        <span>
+                             {{ breeder.name }}:
+                        </span>
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <a href=" url('plant/create') " >
+                                <span class="absolute inset-y-0 right-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline-block stroke-current text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <title> __('Add') </title>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                </span>
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="grid gap-2 grid-cols-1 sm:gap-4 md:grid-cols-2 lg:grid-cols-3 ">
+                    {% for plant in breeder.plants|sort((a, b) => a.name <=> b.name)  %}
+                        {{  include('plant/tab.html.twig') }}                      
+                    {% else %}
+                        There are no plants in this group!
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -22,6 +22,11 @@ class Group
     #[ORM\OneToMany(mappedBy: 'group_id', targetEntity: Plant::class)]
     private $plants;
 
+    // Register Magic Method to Print the name of the State e.g California
+    public function __toString() {
+        return $this->name;
+    }
+
     public function __construct()
     {
         $this->plants = new ArrayCollection();

@@ -15,11 +15,21 @@ class PlantsController extends AbstractController
         $this->plantRepository = $plantRepository;
     }
 
-    #[Route('/plant', name: 'plants')]
+    #[Route('/plant', methods: ['GET'], name: 'plants')]
     public function index(): Response
     {
         return $this->render('plant/index.html.twig', [
-            'plants' => $this->plantRepository->findAll()
+            'plants' => $this->plantRepository->findBy(
+                array(),
+                array('name' => 'ASC'),
+        )]);
+    }
+
+    #[Route('/plant/{id}', methods: ['GET'], name: 'plant')]
+    public function show($id): Response
+    {
+        return $this->render('plant/show.html.twig', [
+            'plant' => $this->plantRepository->find($id)
         ]);
     }
 }

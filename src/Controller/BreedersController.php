@@ -19,7 +19,19 @@ class BreedersController extends AbstractController
     public function index(): Response
     {
         return $this->render('breeder/index.html.twig', [
-            'breeders' => $this->breederRepository->findAll()
-        ]);
+            'breeders' => $this->breederRepository->findBy(
+                array(),
+                array('name' => 'ASC'),
+        )]);
+    }
+
+    #[Route('/breeder/{id}', name: 'breeder')]
+    public function show($id): Response 
+    {
+        return $this->render('breeder/show.html.twig', [
+            'breeder' => $this->breederRepository->findOneBy(
+                array('id' => $id),
+                array('name' => 'ASC')
+            )]);
     }
 }

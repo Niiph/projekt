@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% set header = 'Plants' %}
 {% block title %}Plants list{% endblock %}
 
 {% block body %}
@@ -9,7 +9,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="relative">
                         <span>
-                             __('Plants list') :
+                             Plants list :
                         </span>
                         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                             <a href=" url('plant/create') " >

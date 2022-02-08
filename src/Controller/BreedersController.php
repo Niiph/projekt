@@ -20,8 +20,8 @@ class BreedersController extends AbstractController
     {
         return $this->render('breeder/index.html.twig', [
             'breeders' => $this->breederRepository->findBy(
-                array(),
-                array('name' => 'ASC'),
+                [],
+                ['name' => 'ASC'],
         )]);
     }
 
@@ -30,8 +30,8 @@ class BreedersController extends AbstractController
     {
         return $this->render('breeder/show.html.twig', [
             'breeder' => $this->breederRepository->findOneBy(
-                array('id' => $id),
-                array('name' => 'ASC')
+                ['id' => $id],
+                ['name' => 'ASC']
             )]);
     }
 }

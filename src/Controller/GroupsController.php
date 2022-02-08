@@ -20,8 +20,8 @@ class GroupsController extends AbstractController
     {
         return $this->render('group/index.html.twig', [
             'groups' => $this->groupRepository->findBy(
-                array(),
-                array('name' => 'ASC'),
+                [],
+                ['name' => 'ASC'],
         )]);
     }
 
@@ -29,8 +29,8 @@ class GroupsController extends AbstractController
     public function show($id): Response
     {
         $group = $this->groupRepository->findOneBy(
-            array('id' => $id),
-            array('name' => 'ASC')
+            ['id' => $id],
+            ['name' => 'ASC']
         );
         return $this->render('group/show.html.twig', [
             'group' => $group]);

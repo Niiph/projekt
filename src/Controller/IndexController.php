@@ -20,8 +20,8 @@ class IndexController extends AbstractController
     {
         return $this->render('/index.html.twig', [
             'plants' => $this->plantRepository->findBy(
-                array(),
-                array('id' => 'desc'),
+                [],
+                ['id' => 'desc'],
                 6
         )]);
     }

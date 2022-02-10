@@ -13,22 +13,13 @@
                         </span>
                     </div>
                     <div>
-                        <form action="/group" method="POST">
-                            <div class="grid grid-cols-1 gap-6 mt-6">
-                                <label class="block">
-                                    <span class="text-gray-700">Group name</span>
-                                    <input 
-                                    type="text"
-                                    class="mt-1 block w-80 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                    name="name"
-                                    placeholder="Insert group name"
-                                    required>
-                                </label>
-                                <button class="w-20 mt-4 rounded-md shadow-sm border-2 border-opacity-75 border-indigo-300">
-                                    Submit
-                                </button>
-                            </div>
-                        </form>
+                        <div class="grid grid-cols-1 gap-6 mt-6">
+                            {{ form_start(form) }}
+                            <button class="w-20 mt-4 rounded-md shadow-sm border-2 border-opacity-75 border-indigo-300">
+                                Submit
+                            </button>
+                            {{ form_end(form) }}
+                        </div>
                     </div>
                 </div>
             </div>

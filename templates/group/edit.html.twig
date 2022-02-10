@@ -17,6 +17,13 @@
                             {{ form(form) }}
                         </div>
                     </div>
+                    <div>
+                        <form>
+                            <button formaction="{{ path('group_delete', {id: group.id}) }}" class="w-20 mt-6 rounded-md shadow-sm border-2 border-opacity-75 border-red-500">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

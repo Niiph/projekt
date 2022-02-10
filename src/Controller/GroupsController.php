@@ -71,11 +71,23 @@ class GroupsController extends AbstractController
             return $this->redirectToRoute('groups');
         };
 
-        return $this->render('group/create.html.twig', [
-            'form' => $form->createView()
+        return $this->render('group/edit.html.twig', [
+            'form' => $form->createView(),
+            'group' => $group
         ]);
 
     }
+
+    #[Route('/group/delete/{id}', name: 'group_delete')]
+    public function delete($id): Response
+    {
+        $group = $this->groupRepository->find($id);
+
+        $this->em->remove($group);
+        $this->em->flush();
+
+        return $this->redirectToRoute('groups');
+    }   
     
     #[Route('/group/{id}', name: 'group')]
     public function show($id): Response
@@ -86,17 +98,5 @@ class GroupsController extends AbstractController
                 ['name' => 'ASC']
             )]);
     }
-
-    #[Route('/group/{id}/delete', name: 'group_delete')]
-    public function delete(ManagerRegistry $doctrine, int $id): Response
-    {
-        $entityManager = $doctrine->getManager();
-        $group = $this->groupRepository->find($id);
-
-        $entityManager->remove($group);
-        $entityManager->flush();
-
-        return $this->redirect($this->generateUrl(route: 'groups'));
-    }   
 
 }

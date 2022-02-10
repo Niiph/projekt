@@ -31,10 +31,33 @@ class GroupsController extends AbstractController
         )]);
     }
 
-    #[Route('/group/create', name: 'groupCreate')]
+    #[Route('/group/create', name: 'group_create')]
     public function create(Request $request): Response 
     {
         $group = new Group();
+        $form = $this->createForm(GroupFormType::class, $group);
+
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $newGroup = $form->getData();
+
+            $this->em->persist($newGroup);
+            $this->em->flush();
+
+            return $this->redirectToRoute('groups');
+        };
+
+        return $this->render('group/create.html.twig', [
+            'form' => $form->createView()
+        ]);
+
+    }
+
+    #[Route('/group/edit/{id}', name: 'group_edit')]
+    public function edit(Request $request, $id): Response 
+    {
+        $group = $this->groupRepository->find($id);
         $form = $this->createForm(GroupFormType::class, $group);
 
         $form->handleRequest($request);
@@ -64,7 +87,7 @@ class GroupsController extends AbstractController
             )]);
     }
 
-    #[Route('/group/{id}/delete', name: 'groupDelete')]
+    #[Route('/group/{id}/delete', name: 'group_delete')]
     public function delete(ManagerRegistry $doctrine, int $id): Response
     {
         $entityManager = $doctrine->getManager();
@@ -74,25 +97,6 @@ class GroupsController extends AbstractController
         $entityManager->flush();
 
         return $this->redirect($this->generateUrl(route: 'groups'));
-    }
-
-    #[Route('/group/{id}/edit', name: 'groupEdit')]
-    public function edit($id): Response
-    {
-        return $this->render('group/edit.html.twig', [
-            'group' => $this->groupRepository->find($id)
-        ]);
-    }
-
-    // #[Route('/group/{id}/update', name: 'groupUpdate')]
-    // public function update(ManagerRegistry $doctrine, $request): Response
-    // {
-    //     $entityManager = $doctrine->getManager();
-    //     $group = $this->groupRepository->find($id);
-
-
-    // }
-
-    
+    }   
 
 }

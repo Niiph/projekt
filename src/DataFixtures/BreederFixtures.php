@@ -10,6 +10,7 @@ class BreederFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+
         $breeder = new Breeder();
         $breeder->setName('S. Osipova');
         $breeder->setOriginalName('С. Осипова');
@@ -27,5 +28,9 @@ class BreederFixtures extends Fixture
         $manager->persist($breeder3);
 
         $manager->flush();
+
+        $this->addReference('breeder_1', $breeder);
+        $this->addReference('breeder_2', $breeder2);
+        $this->addReference('breeder_3', $breeder3);
     }
 }

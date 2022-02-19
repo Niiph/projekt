@@ -27,5 +27,10 @@ class GroupFixtures extends Fixture
         $manager->persist($group4);
 
         $manager->flush();
+
+        $this->addReference('group_1', $group);
+        $this->addReference('group_2', $group2);
+        $this->addReference('group_3', $group3);
+        $this->addReference('group_4', $group4);
     }
 }
